@@ -8,11 +8,6 @@
       <input type="password" id="inputPassword" class="form-control" placeholder="Password" v-model="password" required>
       <label for="inputName" class="sr-only">name</label>
       <input type="text" id="inputName" class="form-control" placeholder="Name" v-model="name" required>
-      <div class="checkbox">
-        <label>
-          <input type="checkbox" value="remember-me"> Remember me
-        </label>
-      </div>
       <button class="btn btn-lg btn-primary btn-block">Sign up</button>
     </form>
     <Modal v-if="showModal" @close="showModal = false">
@@ -36,7 +31,7 @@ export default {
   },
   methods:{
     submitForm(){
-      this.axios.post('/users', {
+      this.$axios.post('/users', {
         email: this.email,
         password: this.password,
         name: this.name

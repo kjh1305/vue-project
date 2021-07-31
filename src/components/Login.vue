@@ -14,7 +14,7 @@
       <button class="btn btn-lg btn-primary btn-block">Sign in</button>
     </form>
     <Modal v-if="showModal" @close="showModal = false">
-      <template v-slot:header><h3>경고!</h3></template>
+      <h3 slot="header">custom header</h3>
     </Modal>
   </div>
 </template>
@@ -34,7 +34,7 @@ export default {
   },
   methods:{
     submitForm(){
-      this.axios.post('/login', {
+      this.$axios.post('/login', {
         email: this.email,
         password: this.password
       }).then(res => {

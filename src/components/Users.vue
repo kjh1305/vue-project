@@ -1,73 +1,69 @@
 <template>
-<div>
-  <h1>사용자 정보 리스트</h1>
-  <table class="table table-bordered table-condensed">
-    <tr>
-      <th>번호</th>
-      <th>이메일</th>
-      <th>비밀번호</th>
-      <th>이름</th>
-      <th>날짜</th>
-    </tr>
-    <tr v-for="user in userList" v-bind:key="user.id">
-      <td>{{user.id}}</td>
-      <td>{{user.email}}</td>
-      <td>{{user.password}}</td>
-      <td>{{user.name}}</td>
-      <td>{{user.det}}</td>
-    </tr>
-  </table>
-  <page></page>
-
-</div>
+  <div>
+    <h1>사용자 정보 리스트</h1>
+    {{userList}}
+    <b-table striped hover :items="fields" :fields="fields">
+    </b-table>
+    <div class="overflow-auto">
+      <b-pagination
+          v-model="page"
+          :total-rows="pageList.totalListCnt"
+          :per-page="perPage"
+          first-text="First"
+          prev-text="Prev"
+          next-text="Next"
+          last-text="Last"
+          @page-click="pageClick"
+      ></b-pagination>
+    </div>
+    {{pageList}}
+  </div>
 </template>
 
 <script>
-import Page from "./Page";
 
 export default {
   name: "Users",
-  data: () => {
+  data (){
     return {
-      userList:{}
+      fields:['번호', '이메일', '비밀번호', '이름', '날짜'],
+      userList: [],
+      page:1,
+      perPage:5,
+      pageList:[]
     }
   },
   created() {
-    this.axios.get('/users?page=1')
-    .then(res => {
-      this.userList = res.data
-    })
-    .catch(error => {
-      console.log(error)
-    })
+    this.$axios.get('/users?page='+this.page)
+        .then(res => {
+          this.userList = res.data
+        })
+        .catch(error => {
+          console.log(error)
+        }),
+    this.$axios.get('/users/page?page='+ this.page)
+        .then(res => {
+          this.pageList = res.data
+        })
+        .catch(error => {
+          console.log(error)
+        })
   },
-  components:{
-    Page
+  methods:{
+    pageClick(){
+      console.log("클릭")
+      this.$axios.get('/users?page='+this.page)
+        .then(res =>{
+          this.userList = res.data
+        })
+      .catch(error => {
+        console.log(error)
+      })
+    }
   }
 }
 </script>
 
 <style scoped>
-  h1{
-    color: green;
-    font-size: 50px;
-    padding-bottom: 100px;
-  }
-  table, th, td{
-    border: 3px solid gray;
-    font-size: 18px;
-  }
-  table{
-    border-collapse: collapse;
-    margin-bottom: 150px;
-  }
-  th{
-    text-align: center;
-  }
-  td{
-    text-align: right;
-  }
-  tr:hover{
-    background-color: green;
-  }
+
 </style>

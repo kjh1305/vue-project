@@ -13,7 +13,7 @@
           prev-text="Prev"
           next-text="Next"
           last-text="Last"
-          @page-click="pageClick"
+
       ></b-pagination>
     </div>
     {{pageList}}
@@ -50,15 +50,19 @@ export default {
         })
   },
   methods:{
-    pageClick(){
-      console.log("클릭")
-      this.$axios.get('/users?page='+this.page)
+    pageClick(pageNum){
+      this.$axios.get('/users?page='+pageNum)
         .then(res =>{
           this.userList = res.data
         })
       .catch(error => {
         console.log(error)
       })
+    }
+  },
+  watch: {
+    page: function (pageNum) {
+      this.pageClick(pageNum);
     }
   }
 }

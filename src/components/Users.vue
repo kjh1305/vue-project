@@ -1,10 +1,10 @@
 <template>
   <div>
     <h1>사용자 정보 리스트</h1>
-    {{userList}}
-    <b-table striped hover :items="userList" :fields="fields" primary-key="id">
-
-    </b-table>
+    <b-container>
+      <b-table striped hover :items="userList">
+      </b-table>
+    </b-container>
     <div class="overflow-auto pagination">
       <b-pagination
           v-model="page"
@@ -71,5 +71,9 @@ export default {
 .pagination{
   margin-left: auto;
   margin-right: auto;
+  margin-top: 30px;
+}
+h1{
+  padding-bottom: 50px;
 }
 </style>

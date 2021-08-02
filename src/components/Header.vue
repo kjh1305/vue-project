@@ -14,7 +14,8 @@
           <router-link to="/signup">SignUp</router-link>
         </b-nav-item>
         <b-nav-item>
-          <router-link to="/login">Login</router-link>
+          <a href="#" v-if="CokesToken" v-on:click="logOut">Logout</a>
+          <router-link to="/login" v-else>Login</router-link>
         </b-nav-item>
       </b-navbar-nav>
     </b-collapse>
@@ -23,7 +24,18 @@
 
 <script>
 export default {
-  name: "Header"
+  name: "Header",
+  data:function () {
+    return {
+      CokesToken : this.$cookies.isKey("COKES-TOKEN")
+    }
+  },
+  methods:{
+    logOut(){
+      console.log("logout")
+      this.$cookies.remove("COKES-TOKEN");
+    }
+  }
 }
 </script>
 

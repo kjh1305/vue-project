@@ -25,10 +25,9 @@ import Modal from './common/Modal'
 export default {
   name: "Login",
   data: () => {
-    return{
+    return {
       email: '',
       password: '',
-      token: '',
       showModal: false
     }
   },
@@ -39,7 +38,7 @@ export default {
         password: this.password
       }).then(res => {
         console.log(res.data)
-        this.token = res.data
+        this.$cookies.set("COKES-TOKEN", res.data)
         this.$router.push({path:'/'})
       }).catch(error => {
         console.log(error)

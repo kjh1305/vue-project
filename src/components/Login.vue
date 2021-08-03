@@ -14,7 +14,7 @@
       <button class="btn btn-lg btn-primary btn-block">Sign in</button>
     </form>
     <Modal v-if="showModal" @close="showModal = false">
-      <h3 slot="header">custom header</h3>
+      <h3 slot="header">로그인 실패</h3>
     </Modal>
   </div>
 </template>

@@ -23,19 +23,29 @@
 </template>
 
 <script>
+
 export default {
   name: "Header",
   data:function () {
     return {
-      CokesToken : this.$cookies.isKey("COKES-TOKEN")
+      CokesToken : ''
     }
   },
   methods:{
     logOut(){
       console.log("logout")
       this.$cookies.remove("COKES-TOKEN");
+      this.CokesToken = false
+      this.$router.push({path:'/'})
     }
-  }
+  },
+  created() {
+    if(this.$cookies.isKey("COKES-TOKEN")){
+      this.CokesToken = true
+    }else{
+      this.CokesToken = false
+    }
+  },
 }
 </script>
 

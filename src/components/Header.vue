@@ -14,8 +14,8 @@
           <router-link to="/signup">SignUp</router-link>
         </b-nav-item>
         <b-nav-item>
-          <a href="#" v-if="this.$store.state.CokesToken === true" v-on:click="logOut">Logout</a>
-          <router-link to="/login" v-if="this.$store.state.CokesToken === false">Login</router-link>
+          <a href="#" v-on:click="logOut" >Logout</a>
+          <router-link to="/login" >Login</router-link>
         </b-nav-item>
       </b-navbar-nav>
     </b-collapse>

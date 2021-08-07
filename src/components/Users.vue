@@ -23,7 +23,7 @@
 
 export default {
   name: "Users",
-  data (){
+  data: () => {
     return {
       fields:['번호', '이메일', '비밀번호', '이름', '날짜'],
       userList: [],

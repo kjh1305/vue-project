@@ -1,15 +1,16 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import createPersistedState from 'vuex-persistedstate'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    CokesToken: 'false'
+    CokesToken: localStorage.getItem("CokesToken")
   },
   mutations: {
     SET_TOKEN(state, token){
-      state.CokesToken = token
+      state.CokesToken = localStorage.setItem('CokesToken', token)
     }
   },
   actions: {
@@ -20,6 +21,14 @@ export default new Vuex.Store({
       context.commit('SET_TOKEN', 'false')
     }
   },
+  getters:{
+    getToken(state){
+      return state.CokesToken
+    }
+  },
   modules: {
-  }
+  },
+  plugins:[
+      createPersistedState()
+  ]
 })

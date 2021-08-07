@@ -17,7 +17,7 @@ export default new Vuex.Store({
     submitForm(context){
       context.commit('SET_TOKEN', 'true')
     },
-    logout(context){
+    logout(context) {
       context.commit('SET_TOKEN', 'false')
     }
   },

@@ -14,8 +14,8 @@
           <router-link to="/signup">SignUp</router-link>
         </b-nav-item>
         <b-nav-item>
-          <a href="#" v-on:click="logOut" v-if="this.$store.getters.getToken === 'true'">Logout</a>
-          <router-link to="/login" v-if="this.$store.getters.getToken === 'false'">Login</router-link>
+          <a href="#" v-on:click="logOut" v-if="CokesToken">Logout</a>
+          <router-link to="/login" v-else>Login</router-link>
         </b-nav-item>
       </b-navbar-nav>
     </b-collapse>
@@ -23,6 +23,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex"
 
 export default {
   name: "Header",
@@ -32,8 +33,10 @@ export default {
       this.$cookies.remove("COKES-TOKEN");
       this.$store.dispatch('logout')
       // this.$router.push({path:'/'})
-      this.$router.go();
     }
+  },
+  computed:{
+    ...mapState(["CokesToken"])
   }
 }
 </script>

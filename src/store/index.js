@@ -6,19 +6,22 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    CokesToken: localStorage.getItem("CokesToken")
+    CokesToken: false
   },
   mutations: {
-    SET_TOKEN(state, token){
-      state.CokesToken = localStorage.setItem('CokesToken', token)
+    login_Token(state){
+      state.CokesToken = true
+    },
+    logout_Token(state){
+      state.CokesToken = false
     }
   },
   actions: {
     submitForm(context){
-      context.commit('SET_TOKEN', 'true')
+      context.commit('login_Token')
     },
     logout(context) {
-      context.commit('SET_TOKEN', 'false')
+      context.commit('logout_Token')
     }
   },
   getters:{

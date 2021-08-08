@@ -41,7 +41,6 @@ export default {
         this.$store.dispatch('submitForm')
         this.$cookies.set("COKES-TOKEN", res.data)
         // this.$router.push({path:'/'})
-        this.$router.go()
       }).catch(error => {
         console.log(error)
         this.showModal = true

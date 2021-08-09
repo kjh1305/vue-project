@@ -1,7 +1,10 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
+import VueCookies from "vue-cookies";
+import router from "../router/index"
 
+Vue.use(VueCookies)
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -17,11 +20,13 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    submitForm(context){
+    login(context){
       context.commit('login_Token')
     },
     logout(context) {
+      VueCookies.remove("COKES-TOKEN");
       context.commit('logout_Token')
+      router.push({path:'/'})
     }
   },
   getters:{

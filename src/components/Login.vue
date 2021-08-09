@@ -69,9 +69,11 @@ export default {
         password: this.password
       }).then(res => {
         console.log(res.data)
-        this.$store.dispatch('submitForm')
+        this.$store.dispatch('login')
         this.$cookies.set("COKES-TOKEN", res.data)
         this.isSuccess = true
+        this.email=''
+        this.password=''
         // this.$router.push({path:'/'})
       }).catch(error => {
         console.log(error)

@@ -9,7 +9,12 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    CokesToken: false
+    CokesToken: false,
+    drawer: false,
+    items: [
+      {path: "/", name: "home", title: "Home"},
+      {path: "/users", name: "users", title: "Users"},
+    ]
   },
   mutations: {
     login_Token(state){

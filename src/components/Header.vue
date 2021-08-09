@@ -52,17 +52,12 @@ import { mapState, mapActions } from "vuex"
 export default {
   name: "Header",
   data: () => ({
-    drawer: false,
-    items: [
-      {path: "/", name: "home", title: "Home"},
-      {path: "/users", name: "users", title: "Users"},
-    ]
   }),
   methods: {
     ...mapActions(["logout"])
   },
   computed: {
-    ...mapState(["CokesToken"])
+    ...mapState(["CokesToken","drawer","items"])
   }
 }
 </script>

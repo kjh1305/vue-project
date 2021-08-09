@@ -23,6 +23,7 @@
                   name="login"
                   label="Login"
                   type="text"
+                  v-model="email"
               ></v-text-field>
               <v-text-field
                   id="password"
@@ -30,6 +31,7 @@
                   name="password"
                   label="Password"
                   type="password"
+                  v-model="password"
               ></v-text-field>
             </v-form>
           </v-card-text>
@@ -69,6 +71,7 @@ export default {
         console.log(res.data)
         this.$store.dispatch('submitForm')
         this.$cookies.set("COKES-TOKEN", res.data)
+        this.isSuccess = true
         // this.$router.push({path:'/'})
       }).catch(error => {
         console.log(error)

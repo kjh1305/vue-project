@@ -1,21 +1,19 @@
 <template>
   <div>
-    <h1>사용자 정보 리스트</h1>
-    <b-container>
-      <b-table striped hover :items="userList">
-      </b-table>
-    </b-container>
-    <div class="overflow-auto pagination">
-      <b-pagination
-          v-model="page"
-          :total-rows="pageList.totalListCnt"
-          :per-page="perPage"
-          first-text="First"
-          prev-text="Prev"
-          next-text="Next"
-          last-text="Last"
-      ></b-pagination>
-    </div>
+    <v-container>
+    <h1 class="display-2 font-weight-bold text-center ma-10 pa-4">사용자 정보 리스트</h1>
+      <v-data-table
+          :headers="headers"
+          :items="userList"
+          class="elevation-10"
+          :page.sync="page"
+          :items-per-page="pageList.totalPageCnt"
+          hide-default-footer
+      ></v-data-table>
+      <div class="text-center pt-2">
+        <v-pagination v-model="page" :length="pageList.totalPageCnt" class="ma-5"></v-pagination>
+      </div>
+    </v-container>
   </div>
 </template>
 
@@ -25,10 +23,21 @@ export default {
   name: "Users",
   data: () => {
     return {
-      fields:['번호', '이메일', '비밀번호', '이름', '날짜'],
+      headers: [
+        { text: 'Id', value: 'id' },
+        { text: 'email', value: 'email' },
+        { text: 'password', value: 'password' },
+        {
+          text: 'name',
+          align: 'start',
+          sortable: false,
+          value: 'name',
+        },
+        { text: 'det', value: 'det' },
+      ],
       userList: [],
       page:1,
-      perPage:5,
+      perPage:'',
       pageList:[]
     }
   },
@@ -66,14 +75,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.pagination{
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 30px;
-}
-h1{
-  padding-bottom: 50px;
-}
-</style>

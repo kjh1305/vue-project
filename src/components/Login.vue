@@ -1,26 +1,53 @@
 <template>
-  <div class="container">
-    <form class="form-signin" action="" v-on:submit.prevent="submitForm">
-      <h2 class="form-signin-heading">Please sign in</h2>
-      <label for="inputEmail" class="sr-only">Email address</label>
-      <input type="email" id="inputEmail" class="form-control" placeholder="Email address" v-model="email" required autofocus>
-      <label for="inputPassword" class="sr-only">Password</label>
-      <input type="password" id="inputPassword" class="form-control" placeholder="Password" v-model="password" required>
-      <div class="checkbox">
-        <label>
-          <input type="checkbox" value="remember-me"> Remember me
-        </label>
-      </div>
-      <button class="btn btn-lg btn-primary btn-block">Sign in</button>
-    </form>
-    <Modal v-if="showModal" @close="showModal = false">
-      <h3 slot="header">로그인 실패</h3>
-    </Modal>
-  </div>
+  <v-container fluid fill-height>
+    <v-layout align-center justify-center>
+      <v-flex xs12 sm8 md4>
+        <v-alert
+            v-bind:value="isSuccess"
+            type="success">
+          로그인 성공
+        </v-alert>
+        <v-alert
+            v-bind:value="isError"
+            type="error">
+          로그인 실패 ID와 PW를 확인해주세요
+        </v-alert>
+        <v-card class="elevation-12">
+          <v-toolbar dark color="primary">
+            <v-toolbar-title>Login form</v-toolbar-title>
+          </v-toolbar>
+          <v-card-text>
+            <v-form>
+              <v-text-field
+                  prepend-icon="person"
+                  name="login"
+                  label="Login"
+                  type="text"
+              ></v-text-field>
+              <v-text-field
+                  id="password"
+                  prepend-icon="lock"
+                  name="password"
+                  label="Password"
+                  type="password"
+              ></v-text-field>
+            </v-form>
+          </v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="primary" @click="submitForm">Login</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-flex>
+    </v-layout>
+<!--    <Modal v-if="showModal" @close="showModal = false">-->
+<!--      <h3 slot="header">로그인 실패</h3>-->
+<!--    </Modal>-->
+  </v-container>
 </template>
 
 <script>
-import Modal from './common/Modal'
+// import Modal from './common/Modal'
 
 export default {
   name: "Login",
@@ -28,7 +55,9 @@ export default {
     return {
       email: '',
       password: '',
-      showModal: false
+      showModal: false,
+      isSuccess: false,
+      isError: false
     }
   },
   methods:{
@@ -43,12 +72,13 @@ export default {
         // this.$router.push({path:'/'})
       }).catch(error => {
         console.log(error)
-        this.showModal = true
+        // this.showModal = true
+        this.isError = true
       })
     }
   },
   components:{
-    Modal
+    // Modal
   }
 }
 </script>

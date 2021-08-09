@@ -5,6 +5,7 @@ import store from './store'
 import axios from "axios";
 import VueCookies from "vue-cookies"
 import vuetify from './plugins/vuetify'
+import 'material-design-icons-iconfont/dist/material-design-icons.css'
 
 Vue.use(VueCookies)
 Vue.config.productionTip = false

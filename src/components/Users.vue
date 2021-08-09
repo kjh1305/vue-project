@@ -6,13 +6,16 @@
       <v-data-table
           :headers="userListHeaders"
           :items="userList"
-          class="elevation-10"
-          :page.sync="page"
           :items-per-page="userListPageList.totalPageCnt"
           hide-default-footer
+          class="elevation-10"
       ></v-data-table>
       <div class="text-center pt-2">
-        <v-pagination v-model="page" :length="userListPageList.totalPageCnt" class="ma-5"></v-pagination>
+        <v-pagination v-model="page"
+                      :length="userListPageList.totalPageCnt"
+                      :total-visible="userListTotalVisible"
+                      
+                      class="ma-5"></v-pagination>
       </div>
     </v-container>
   </div>
@@ -29,11 +32,16 @@ export default {
     }
   },
   computed:{
-    ...mapState(["userListHeaders","userList","userListPageList"])
+    ...mapState(["userListHeaders","userList","userListPageList","userListTotalVisible"])
   },
   created() {
     this.$store.dispatch("userGetList")
     this.$store.dispatch("userGetPage")
+  },
+  methods:{
+    test(){
+      console.log("test")
+    }
   },
   watch: {
     page: function (pageNum) {

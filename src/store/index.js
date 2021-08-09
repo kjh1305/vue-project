@@ -24,7 +24,9 @@ export default new Vuex.Store({
       { text: 'det', value: 'det' },
     ],
     userList: [],
-    userListPageList:[]
+    userListPageList:[],
+    userListTotalVisible:5,
+    userListPage:1
   },
   mutations: {
     user_List(state, list){
